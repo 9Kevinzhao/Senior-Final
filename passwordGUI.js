@@ -12,7 +12,7 @@ function getString(){
         let passesAllChecks = true;
 
         //Conditional Statements here.
-
+        
 
         if(!passesAllChecks){
             console.log("\nTry again\n");

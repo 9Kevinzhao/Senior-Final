@@ -1,13 +1,19 @@
 var exports = module.exports = {};
 
 function PasswordMessage(m){
+
 this.name="Password Message";
 this.message=m;
 }
 
 function inRange(char,min,max){
     let unicode = char.charCodeAt(0);
-
+    if(unicode>= min&&unicode<=max){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 exports.checkLength = function(str){
@@ -33,7 +39,7 @@ exports.checkLength = function(str){
 exports.containsUpper =function(str){
     var count=0
 for(var i=0;i<str.length;i++){
-    if(str.charCodeAt(i)>=65&& str[i].charCodeAt>=90){
+    if(inRange(str[i],65,90)){
         count++;
     }
 }
@@ -45,30 +51,44 @@ if(count==str.length){
 
 exports.containsLower =function(str){
     var count=0
-    for(var i=0;i<str.length;i++){
-    if(str.charCodeAt(i)>=97&& str[i].charCodeAt>=122){
+for(var i=0;i<str.length;i++){
+    if(inRange(str[i],97,122)){
         count++;
     }
-    }
-    if(count==str.length){
+}
+if(count==str.length){
     return true;
-    }
+}
 }
 
 
 exports.containsNumerical =function(str){
     var count=0
-    for(var i=0;i<str.length;i++){
-    if(str.charCodeAt(i)>=48&& str[i].charCodeAt>=57){
+for(var i=0;i<str.length;i++){
+    if(inRange(str[i],48,57)){
         count++;
     }
-    }
-    if(count==str.length){
+}
+if(count==str.length){
     return true;
-    }
+}
 }
 
 
 exports.containsSpecial =function(str){
-
+    var count=0
+    var special=[33,64,35,36,37,38,94,42]
+    for(var i=0;i<str.length;i++){
+        for(var j=0;j<special.length;j++){
+            if(str[i]==special[i]){
+                count++;
+            }
+        }
+    }
+    if(!count == 0){
+        throw new PasswordMessage("Your password contains speical special characters")
+    }
+    else{
+        return true;
+    }
 }
