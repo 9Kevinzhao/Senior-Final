@@ -80,15 +80,22 @@ exports.containsSpecial =function(str){
     var special=[33,64,35,36,37,38,94,42]
     for(var i=0;i<str.length;i++){
         for(var j=0;j<special.length;j++){
-            if(str[i]==special[i]){
+            if(str[i].charCodeAt(0)==special[j]){
                 count++;
             }
         }
     }
+    var valid2 = (count == 0)
+    try{
     if(!count == 0){
-        throw new PasswordMessage("Your password contains speical special characters")
+        throw new PasswordMessage("Your password contains special characters")
     }
     else{
-        return true;
+        throw new PasswordMessage("Your passowrd doesn't contain any special characters")
     }
+}
+catch(e){
+    console.log(e.name+": "+e.message);
+    return valid2;
+}
 }
